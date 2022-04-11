@@ -16,6 +16,7 @@ struct HotPotato *createHotPotato(thread *myThread)
 //int pthread_create(pthread_t *thread, pthread_attr_t *attr,
 //                    void*(*start_routine) (void *arg), void *arg);
 
+
 void main()
 {
     char *usrin;
