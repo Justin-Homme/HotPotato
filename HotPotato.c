@@ -22,41 +22,59 @@ struct Potato *createPotato(int newNumID)
 
 void main()
 {
+    /*
+    * variables
+    */
     char *usrin;
     pthread_t child_thread;
     int curIndex = 0;
     int passIndex = 0;
     struct Potato thread_array[8];
+    bool finished = false;
+
     printf("T - thread; H - Hot Potato; G - Gold; x - exit\n");
-    scanf(" %c", &usrin);
-    switch(usrin) {
-        case 'T':
-            struct Potato newthread = createPotato(curIndex);
-            pthread_create(&child_thread, NULL, newthread, NULL);
-            thread_array[curIndex] = newThread;
-            curIndex++;
-        case 'H':
-            passIndex = rand() % curIndex + 0;
-            struct Potato *curThread = thread_array[passIndex];
-            curThread->potato_count = curThread->potato_count + 1;
-            printf("%d: Ouch! I have the hot potato!\n", passIndex);
-        case 'G':
-            goldIndex = rand() % curIndex + 0;
-            struct Potato *curThread = thread_array[goldIndex];
-            curThread->gold_count = curThread->gold_count + 1;
-        case 'x':
-            exit();
-        default:
-            printf("You must enter one of the following characters: \n");
-            printf("T - thread; H - Hot Potato; G - Gold; x - exit\n");
-            scanf(" %c", %usrin);
-            checkInput(usrin);
+
+    while(finished == false) {
+        scanf(" %c", &usrin);
+        switch(usrin) {
+            case 'T':
+                struct Potato newthread = createPotato(curIndex);
+                pthread_create(&child_thread, NULL, newthread, NULL);
+                thread_array[curIndex] = newThread;
+                curIndex++;
+            case 'H':
+                passPotato();
+            case 'G':
+                goldIndex = rand() % curIndex + 0;
+                struct Potato *curThread = thread_array[goldIndex];
+                curThread->gold_count = curThread->gold_count + 1;
+            case 'x':
+                finished = true;
+            default:
+                printf("You must enter one of the following characters: \n");
+                printf("T - thread; H - Hot Potato; G - Gold; x - exit\n");
+                scanf(" %c", %usrin);
+                checkInput(usrin);
+        }
+
+        sleep(1);
+        passPotato();
+//      switchGold();        
     }
+
+    passPotato()
+    {
+        passIndex = rand() % curIndex + 0;
+        struct Potato *curThread = thread_array[passIndex];
+        curThread->potato_count = curThread->potato_count + 1;
+        printf("%d: Ouch! I have the hot potato!\n", passIndex);
+    } // passPotato
 
     switchGold()
     {
         // TODO: implement the function
-    }
+
+    } // switchGold
 } // main
 
 void exit()
