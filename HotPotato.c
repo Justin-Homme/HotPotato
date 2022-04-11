@@ -30,11 +30,11 @@ void main()
     int curIndex = 0;
     int passIndex = 0;
     struct Potato thread_array[8];
-    bool finished = false;
+    int finished = 0;                // is the program finished riunning?
 
     printf("T - thread; H - Hot Potato; G - Gold; x - exit\n");
 
-    while(finished == false) {
+    while(finished == 0) {
         scanf(" %c", &usrin);
         switch(usrin) {
             case 'T':
@@ -49,7 +49,7 @@ void main()
                 struct Potato *curThread = thread_array[goldIndex];
                 curThread->gold_count = curThread->gold_count + 1;
             case 'x':
-                finished = true;
+                finished = 1;
             default:
                 printf("You must enter one of the following characters: \n");
                 printf("T - thread; H - Hot Potato; G - Gold; x - exit\n");
@@ -59,7 +59,7 @@ void main()
 
         sleep(1);
         passPotato();
-//      switchGold();        
+//      switchGold();
     }
 
     passPotato()
