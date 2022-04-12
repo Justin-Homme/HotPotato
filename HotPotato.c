@@ -24,6 +24,10 @@ struct Potato *createPotato(int newNumID)
 //int pthread_create(pthread_t *thread, pthread_attr_t *attr,
 //                    void*(*start_routine) (void *arg), void *arg);
 
+void *newthread(void *arg)
+{
+    sleep(1);
+} // mythread
 
 void main()
 {
@@ -44,13 +48,13 @@ void main()
         scanf(" %c", &usrin);
         switch (usrin) {
             case 'T':
-                struct Potato *newthread = createPotato(curIndex);
+                struct Potato *newPotato = createPotato(curIndex);
                 pthread_create(&child_thread, NULL, newthread, NULL);
-                thread_array[curIndex] = newthread;
+                thread_array[curIndex] = newPotato;
                 curIndex++;
                 break;
             case 'H':
-                passPotato();
+                passPotato(passIndex, curIndex, thread_array);
                 break;
             case 'G':
                 goldIndex = rand() % curIndex + 0;
@@ -68,17 +72,11 @@ void main()
         }
 
         sleep(1);
-        passPotato();
+        passPotato(passIndex, curIndex, thread_array);
 //      switchGold();
     }
 
-    void passPotato()
-    {
-        passIndex = rand() % curIndex + 0;
-        struct Potato *curThread = thread_array[passIndex];
-        curThread->potato_count = curThread->potato_count + 1;
-        printf("%d: Ouch! I have the hot potato!\n", passIndex);
-    } // passPotato
+
 
     void switchGold()
     {
@@ -86,3 +84,11 @@ void main()
 
     } // switchGold
 } // main
+
+void passPotato(int myPassIndex, int myCurIndex, struct Potato *threadArray[])
+{
+    myPassIndex = rand() % myCurIndex + 0;
+    struct Potato *curThread = threadArray[myPassIndex];
+    curThread->potato_count = curThread->potato_count + 1;
+    printf("%d: Ouch! I have the hot potato!\n", myPassIndex);
+} // passPotato
